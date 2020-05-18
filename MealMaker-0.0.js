@@ -1,18 +1,27 @@
-https://gist.github.com/a1f101f7d6e55b15e398695a595e481c
-
-
 const menu = {
   _courses: {
     appetizers: [],
     mains: [],
     desserts: []
   },
-  get appetizers() {},
-  set appetizers(appetizerIn) {},
-  get mains() {},
-  set mains(mainIn) {},
-  get desserts() {},
-  set desserts(dessertIn) {},
+  get appetizers() {
+    return this._courses.appetizers;
+  },
+  set appetizers(appetizer) {
+    this.appetizers = appetizer;
+  },
+  get mains() {
+    return this._courses.mains;
+  },
+  set mains(main) {
+    this.mains = mains;
+  },
+  get desserts() {
+    return this._courses.desserts;
+  },
+  set desserts(dessert) {
+    this.dessert = dessert;
+  },
   get courses() {
     return {
       appetizers: this.appetizers,
@@ -25,13 +34,14 @@ const menu = {
       name: dishName,
       price: dishPrice
     };
-    this._courses[courseName].push(dish);
+    return this._courses[courseName].push(dish);
   },
-  getRandomDishFromCourse: function (courseName) {
+  getRandomDishFromCourse(courseName) {
     const dishes = this._courses[courseName];
     const randomIndex = Math.floor(Math.random() * dishes.length);
+    return dishes[randomIndex];
     },
-  generateRandomMeal: function () {
+  generateRandomMeal() {
     let appetizer = this.getRandomDishFromCourse('appetizers');
     let main = this.getRandomDishFromCourse('mains');
     let dessert = this.getRandomDishFromCourse('desserts');
@@ -40,5 +50,17 @@ const menu = {
   }
 }
 
-menu.addDishToCourse('todaysItalian', 'capreze', 16.0);
-menu.addDishToCourse('BonjourFrench', 'Pot', 14.0);
+menu.addDishToCourse('appetizers', 'capreze', 3.0);
+menu.addDishToCourse('appetizers', 'Shira-Ae', 4.0);
+menu.addDishToCourse('appetizers', 'Liangban-Doufu', 4.0);
+
+menu.addDishToCourse('mains', 'Pot with Bread', 10.0);
+menu.addDishToCourse('mains', 'Katsu-Don with Miso-soup', 14.0);
+menu.addDishToCourse('mains', 'Sanxian-Chaofan with egg soup', 12.0);
+
+menu.addDishToCourse('desserts', 'Chocolate Tarte with Coffee', 7.0);
+menu.addDishToCourse('desserts', 'Kinton with Okoicha', 10.0);
+menu.addDishToCourse('desserts', 'Huashenggao with Jasmin tea', 8.0);
+
+let meal = menu.generateRandomMeal();
+console.log(meal);
